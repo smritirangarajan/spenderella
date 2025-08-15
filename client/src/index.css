@@ -1,0 +1,506 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ---------- Global fixes ---------- */
+body {
+  pointer-events: auto !important;
+  font-family: "Onest", system-ui, -apple-system, Segoe UI, Roboto, sans-serif !important;
+}
+
+/* Capitalize "every 2 weeks", etc. */
+.recurring-control button span {
+  text-transform: capitalize !important;
+}
+
+/* Dark variant helper for Tailwind */
+@custom-variant dark (&:is(.dark *));
+
+/* ---------- Token mapping ---------- */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ---------- Palette: Girly Minimal Light ---------- */
+:root {
+  --max-width: 78rem;
+  --radius: 1rem;
+
+  /* Soft warm white background with subtle pink undertone */
+  --background: oklch(0.99 0.003 330);      /* softest pink-white */
+  --foreground: oklch(0.25 0.015 300);      /* deep plum-gray text */
+
+  /* Cards with subtle warmth */
+  --card: oklch(0.98 0.005 330);            /* barely pink cards */
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.99 0.003 330);         
+  --popover-foreground: var(--foreground);
+
+  /* Primary: soft rose-pink */
+  --primary: oklch(0.65 0.12 340);          /* muted rose */
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* Secondary: warm neutral with pink undertone */
+  --secondary: oklch(0.94 0.008 330);       /* warm light gray */
+  --secondary-foreground: oklch(0.35 0.015 300);
+
+  /* Muted: subtle pink-gray */
+  --muted: oklch(0.95 0.006 330);           /* hover states */
+  --muted-foreground: oklch(0.52 0.01 300); /* readable muted text */
+
+  /* Accent: soft lavender for variety */
+  --accent: oklch(0.68 0.08 310);           /* gentle lavender */
+  --accent-foreground: oklch(0.99 0 0);
+
+  /* Borders: soft pink-gray */
+  --border: oklch(0.90 0.008 330);          /* subtle pink borders */
+  --input: var(--border);
+  --ring: oklch(0.70 0.10 340);             /* focus ring */
+
+  /* Destructive: soft coral-red */
+  --destructive: oklch(0.60 0.15 20);       
+
+  /* Charts: harmonious pink-purple palette */
+  --chart-1: oklch(0.65 0.12 340);          /* rose */
+  --chart-2: oklch(0.68 0.08 310);          /* lavender */
+  --chart-3: oklch(0.72 0.06 280);          /* soft purple */
+  --chart-4: oklch(0.75 0.04 350);          /* blush */
+  --chart-5: oklch(0.58 0.08 320);          /* mauve */
+
+  /* Sidebar matches background */
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+/* ---------- Palette: Girly Minimal Dark ---------- */
+.dark {
+  /* Deep plum-black background */
+  --background: oklch(0.12 0.015 320);      /* dark plum */
+  --foreground: oklch(0.95 0.008 330);      /* soft pink-white */
+
+  --card: oklch(0.16 0.012 320);            /* dark plum panels */
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+
+  /* Brighter rose for dark mode */
+  --primary: oklch(0.72 0.15 340);          /* bright rose */
+  --primary-foreground: oklch(0.12 0.015 320);
+
+  --secondary: oklch(0.22 0.012 320);       /* dark neutral */
+  --secondary-foreground: oklch(0.88 0.008 330);
+
+  --muted: oklch(0.24 0.010 320);           /* subtle highlights */
+  --muted-foreground: oklch(0.72 0.008 310); 
+
+  --accent: oklch(0.75 0.10 310);           /* bright lavender */
+  --accent-foreground: oklch(0.12 0.015 320);
+
+  --ring: oklch(0.75 0.12 340);
+  --border: oklch(0.28 0.010 320);          /* subtle borders */
+  --input: var(--border);
+
+  --destructive: oklch(0.68 0.18 25);
+
+  /* Dark mode charts */
+  --chart-1: oklch(0.72 0.15 340);
+  --chart-2: oklch(0.75 0.10 310);
+  --chart-3: oklch(0.68 0.08 280);
+  --chart-4: oklch(0.78 0.06 350);
+  --chart-5: oklch(0.65 0.10 320);
+
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+/* ---------- Base layer ---------- */
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body {
+    @apply bg-[var(--background)] text-foreground;
+    background: var(--background);
+  }
+  h1,h2,h3 { 
+    font-family: inherit; 
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  h1 { @apply text-3xl md:text-4xl; }
+  h2 { @apply text-2xl md:text-3xl; }
+  h3 { @apply text-xl md:text-2xl; }
+}
+
+/* ---------- Girly Minimal Components ---------- */
+
+/* Cards with subtle elevation */
+.card-princess,
+.card-glass,
+.panel-fairy {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 8px oklch(0 0 0 / 0.04), 0 1px 3px oklch(0 0 0 / 0.06);
+  transition: all 0.2s ease;
+}
+
+.card-princess:hover,
+.card-glass:hover,
+.panel-fairy:hover {
+  box-shadow: 0 4px 16px oklch(0 0 0 / 0.06), 0 2px 6px oklch(0 0 0 / 0.08);
+  transform: translateY(-1px);
+}
+
+/* Special styling for metric cards */
+.metric-card {
+  background: linear-gradient(135deg, 
+    color-mix(in oklch, var(--card) 95%, var(--primary) 5%) 0%,
+    var(--card) 100%);
+  border: 1px solid color-mix(in oklch, var(--border) 70%, var(--primary) 30%);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 8px oklch(0 0 0 / 0.04);
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  box-shadow: 0 8px 24px oklch(0 0 0 / 0.08);
+  transform: translateY(-2px);
+  border-color: color-mix(in oklch, var(--border) 50%, var(--primary) 50%);
+}
+
+/* Tables with girly touches */
+.table-frosted {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.table-frosted thead th {
+  background: linear-gradient(180deg, 
+    color-mix(in oklch, var(--card) 90%, var(--primary) 10%) 0%,
+    var(--card) 100%);
+  color: var(--foreground);
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.table-frosted tbody tr + tr { 
+  border-top: 1px solid color-mix(in oklch, var(--border) 60%, transparent); 
+}
+
+.table-frosted tbody tr:hover { 
+  background: linear-gradient(90deg,
+    color-mix(in oklch, var(--muted) 80%, var(--primary) 20%) 0%,
+    var(--muted) 100%);
+}
+
+.table-frosted td {
+  padding: 1rem 1.5rem;
+}
+
+/* Girly buttons */
+.btn-princess {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .75rem 1.25rem;
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all .2s ease;
+  background: linear-gradient(135deg, var(--primary) 0%, color-mix(in oklch, var(--primary) 85%, var(--accent) 15%) 100%);
+  color: var(--primary-foreground);
+  border: 1px solid color-mix(in oklch, var(--primary) 80%, transparent);
+  box-shadow: 0 2px 4px color-mix(in oklch, var(--primary) 25%, transparent);
+}
+
+.btn-princess:hover { 
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px color-mix(in oklch, var(--primary) 30%, transparent);
+  filter: brightness(1.05);
+}
+
+.btn-outline-rose {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .75rem 1.25rem;
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all .2s ease;
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+
+.btn-outline-rose:hover { 
+  background: color-mix(in oklch, var(--primary) 8%, transparent);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px color-mix(in oklch, var(--primary) 20%, transparent);
+}
+
+/* Girly inputs */
+.input-fairy {
+  @apply w-full px-4 py-3;
+  background: var(--card);
+  border: 1.5px solid var(--input);
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+  transition: all .2s ease;
+  box-shadow: inset 0 1px 2px oklch(0 0 0 / 0.03);
+}
+
+.input-fairy::placeholder { 
+  color: var(--muted-foreground); 
+  font-style: italic;
+}
+
+.input-fairy:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 
+    inset 0 1px 2px oklch(0 0 0 / 0.03),
+    0 0 0 3px color-mix(in oklch, var(--primary) 20%, transparent);
+  transform: scale(1.01);
+}
+
+/* Girly badges */
+.badge-tiara {
+  @apply inline-flex items-center rounded-full px-3 py-1.5 text-xs font-medium;
+  background: linear-gradient(135deg, 
+    color-mix(in oklch, var(--secondary) 90%, var(--primary) 10%) 0%,
+    var(--secondary) 100%);
+  border: 1px solid color-mix(in oklch, var(--border) 70%, var(--primary) 30%);
+  color: color-mix(in oklch, var(--foreground) 85%, var(--primary) 15%);
+  box-shadow: 0 1px 2px oklch(0 0 0 / 0.05);
+}
+
+/* Sidebar styling */
+.sidebar-tiara {
+  background: var(--sidebar);
+  border-right: 1px solid var(--sidebar-border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Empty states with personality */
+.empty-ballroom {
+  @apply text-center p-12 rounded-lg;
+  background: linear-gradient(135deg,
+    color-mix(in oklch, var(--card) 95%, var(--primary) 5%) 0%,
+    var(--card) 100%);
+  border: 2px dashed color-mix(in oklch, var(--border) 60%, var(--primary) 40%);
+  color: var(--muted-foreground);
+}
+
+.empty-ballroom::before {
+  content: "✨";
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.6;
+}
+
+/* Header with subtle gradient */
+.header-hero {
+  background: linear-gradient(180deg,
+    var(--background) 0%,
+    color-mix(in oklch, var(--background) 98%, var(--primary) 2%) 100%);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.03);
+}
+
+/* Progress rings with subtle glow */
+.glow-ring {
+  border-radius: 999px;
+  box-shadow: 
+    0 0 0 1px color-mix(in oklch, var(--primary) 30%, transparent),
+    0 2px 4px color-mix(in oklch, var(--primary) 15%, transparent);
+}
+
+/* ---------- Enhanced Interactions ---------- */
+
+/* Links with girly hover */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: color-mix(in oklch, var(--primary) 80%, var(--accent) 20%);
+  text-decoration: underline;
+}
+
+/* Focus states */
+:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 30%, transparent);
+  border-radius: 8px;
+}
+
+/* Hover states for interactive elements */
+tr[role="button"]:hover,
+tr[data-clickable="true"]:hover {
+  background: linear-gradient(90deg,
+    color-mix(in oklch, var(--muted) 80%, var(--primary) 20%) 0%,
+    var(--muted) 100%);
+  cursor: pointer;
+}
+
+/* Disabled states */
+.btn-princess:disabled,
+.btn-outline-rose:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Form helpers */
+label { 
+  color: var(--foreground); 
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.help-text,
+.form-description { 
+  color: var(--muted-foreground); 
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.input-error {
+  border-color: var(--destructive);
+  box-shadow: 
+    inset 0 1px 2px oklch(0 0 0 / 0.03),
+    0 0 0 3px color-mix(in oklch, var(--destructive) 20%, transparent);
+}
+
+/* Chart enhancements */
+.recharts-cartesian-grid line {
+  stroke: color-mix(in oklch, var(--border) 70%, transparent);
+  opacity: 1;
+}
+
+.recharts-cartesian-axis-tick text {
+  fill: var(--muted-foreground);
+  font-size: 12px;
+}
+
+.recharts-tooltip-wrapper {
+  filter: drop-shadow(0 4px 12px oklch(0 0 0 / 0.1));
+}
+
+/* Data table enhancements */
+table thead th {
+  color: var(--foreground);
+  background: linear-gradient(180deg, 
+    color-mix(in oklch, var(--card) 90%, var(--primary) 10%) 0%,
+    var(--card) 100%);
+  border-bottom: 2px solid var(--border);
+}
+
+/* ---------- Utility Classes ---------- */
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtle-shadow {
+  box-shadow: 0 2px 8px oklch(0 0 0 / 0.04);
+}
+
+.girly-border {
+  border: 1px solid color-mix(in oklch, var(--border) 70%, var(--primary) 30%);
+}
+
+/* ---------- Animations ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklch, var(--primary) 10%, transparent),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}

@@ -10,7 +10,7 @@ This is my personal full-stack finance tracker with AI-powered features.
 ![Dashboard](client/src/assets/images/dashboardfixed.png)
 
 ### Transactions
-![Transactions](client/src/assets/images/transactions.png)
+![Transactions](client/src/assets/images/transaction.png)
 
 ---
 
